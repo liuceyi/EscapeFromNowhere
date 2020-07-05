@@ -1,0 +1,67 @@
+{
+  	"Attack": 
+    [
+    	{
+    		"Name":"Giant Saw",
+    		"Type":"move",
+      		"ATK": "2",
+      		"Speed": "80",
+      		"CD":"30"
+    	},
+    	{
+    		"Name":"Fire Ball",
+    		"Type":"move",
+      		"ATK": "2",
+      		"Buff":"Burn",
+      		"Speed": "80",
+      		"CD":"30"
+    	},
+    	{
+    		"Name":"Thunder",
+    		"Type":"instant",
+      		"ATK": "2",
+      		"CD":"30"
+    	}
+    ]
+  	,
+  	"Support": 
+  	[
+    	{
+    		"Name":"Shield",
+    		"Type":"shield",
+      		"HP": "3",
+      		"Duration": "10",
+      		"CD": "30"
+    	},
+    	{
+    		"Name":"Wind In Spring",
+    		"Type":"heal",
+      		"HP": "5",
+      		"Duration": "10",
+      		"CD": "30"
+    	},
+      {
+        "Name":"Mercy Rain",
+        "Type":"heal",
+          "Buff": "Heal",
+          "Duration": "10",
+          "CD": "30"
+      }
+  	],
+  	"Movement": [
+    	{
+    		"Name":"Flash",
+      		"Type": "move",
+      		"Rate":"50",
+          "Buff":"SpeedUp",
+      		"Duration": "5",
+      		"CD": "30"
+    	},
+    	{
+    		"Name":"Teleport",
+      		"Type": "instant",
+      		"Length":"30",
+      		"CD": "30"
+    	}
+  	]
+}
