@@ -10,14 +10,29 @@ public class GameMenuUI : MonoBehaviour
 
     public RectTransform rtLine;
 
+    private Sequence seq;
 
+    private void Awake()
+    {
+        seq = DOTween.Sequence();
+
+        Tween t1 = rtLine.DOScaleY(1, 1f);
+        Tween t2 = rtLine.GetComponent<Image>().DOFade(1, 1f);
+
+        seq.Append(t1);
+        seq.Join(t2);
+        seq.SetAutoKill(false);
+        seq.Pause();
+    }
 
 
     private void ShowPopups()
     {
         rtLine.localScale = Vector2.right;
+        rtLine.GetComponent<Image>().color = new Color(1, 1, 1, 0);
         objPopups.SetActive(true);
-        rtLine.DOScaleY(1, 1f);
+        seq.Restart();
+        
     }
 
     private void HidePopups()
