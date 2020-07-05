@@ -7,7 +7,7 @@ public partial class PlayerController
     public CircleCollider2D feetCollider = null;
     public LayerMask groundLayer;
     public int jumpTime = 2;
-    public float jumpPower = 60;
+    public float jumpPower = 12;
     private int _jumpTime = 0;
     //是否是着陆状态
     private bool isGrounded = false;
@@ -52,6 +52,7 @@ public partial class PlayerController
 
 
         _jumpTime--;
-        thisBody.AddForce(Vector2.up * jumpPower);
+        //thisBody.AddForce(Vector2.up * jumpPower);
+        thisBody.velocity = Vector2.up * jumpPower;
     }
 }
