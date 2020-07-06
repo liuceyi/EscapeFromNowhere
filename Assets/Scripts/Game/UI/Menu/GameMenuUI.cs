@@ -8,9 +8,11 @@ public class GameMenuUI : MonoBehaviour
 {
     public GameObject objPopups;
     public RectTransform rtLine;
+
     public CanvasGroup canvasGroupIcon;
     public List<ItemMenuIcon> listIcon;
     public List<GameObject> listContent;
+    public RectTransform rtContent;
 
     private int beHavorIndex = 0;
     private int beSelectedIndex = 0;
@@ -129,17 +131,15 @@ public class GameMenuUI : MonoBehaviour
     public void SelectedIcon()
     {
         listIcon[beSelectedIndex].UnSelect();
-        if (beSelectedIndex < listContent.Count && listContent[beSelectedIndex] != null)
-        {
-            listContent[beSelectedIndex].SetActive(false);
-        }
+        //rtContent.
+        PublicTool.ClearAllChildren(rtContent);
 
         beSelectedIndex = beHavorIndex;
 
         listIcon[beHavorIndex].BeSelect();
         if (beSelectedIndex < listContent.Count && listContent[beSelectedIndex] != null)
         {
-            listContent[beSelectedIndex].SetActive(true);
+            GameObject obj = GameObject.Instantiate(listContent[beSelectedIndex], rtContent);
         }
     }
 
