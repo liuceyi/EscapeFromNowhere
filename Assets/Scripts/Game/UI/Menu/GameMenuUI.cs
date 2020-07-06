@@ -140,6 +140,8 @@ public class GameMenuUI : MonoBehaviour
         if (beSelectedIndex < listContent.Count && listContent[beSelectedIndex] != null)
         {
             GameObject obj = GameObject.Instantiate(listContent[beSelectedIndex], rtContent);
+            MenuChildManager item = obj.GetComponent<MenuChildManager>();
+            item.Init();
         }
     }
 
