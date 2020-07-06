@@ -6,10 +6,11 @@ public partial class PlayerController : MonoBehaviour
 {
     protected Rigidbody2D thisBody = null;
     public float movingSpeed = 2.8f;
-
+    
     private void Awake()
     {
         thisBody = this.GetComponent<Rigidbody2D>();
+        
     }
 
     void Update()
