@@ -11,7 +11,8 @@ public class PlayerSave : Singleton<PlayerSave>
     public PlayerModel playerModel = new PlayerModel(); //浅拷贝playerModel类，同一地址共享数据
     private PlayerSaveModel playerSaveModel = new PlayerSaveModel(); //playerSaveModel类
     string filePath = Application.dataPath + "/Resources/Save/Save.json";
-    // Update is called once per frame
+
+    #region 存档
     public void gameSave()
     {
         objectToJson();
@@ -21,6 +22,28 @@ public class PlayerSave : Singleton<PlayerSave>
         //关闭StreamWriter
         sw.Close();
     }
+    void objectToJson()
+    {
+        playerSaveModel.playerName = playerModel.playerName;
+        playerSaveModel.playerMaxHP = playerModel.playerMaxHP;
+        playerSaveModel.playerHP = playerModel.playerHP;
+        playerSaveModel.playerSTR = playerModel.playerSTR;
+        playerSaveModel.playerDEF = playerModel.playerDEF;
+        playerSaveModel.playerINT = playerModel.playerINT;
+        playerSaveModel.playerSkillList = playerModel.playerSkillList;
+        playerSaveModel.playerPosition = creatVector2Save(playerModel.playerPosition);
+    }
+    Vector2Save creatVector2Save(Vector2 vec)
+    {
+        Vector2Save v2s = new Vector2Save();
+        v2s.x = double.Parse(vec.x.ToString());
+        v2s.y = double.Parse(vec.y.ToString());
+        return v2s;
+    }
+    #endregion
+
+
+    #region 读档
     public void gameRead()
     {
         
@@ -44,18 +67,7 @@ public class PlayerSave : Singleton<PlayerSave>
         }
 
     }
-    void objectToJson() 
-    {
-        playerSaveModel.playerName = playerModel.playerName;
-        playerSaveModel.playerMaxHP = playerModel.playerMaxHP;
-        playerSaveModel.playerHP = playerModel.playerHP;
-        playerSaveModel.playerSTR = playerModel.playerSTR;
-        playerSaveModel.playerDEF = playerModel.playerDEF;
-        playerSaveModel.playerINT = playerModel.playerINT;
-        playerSaveModel.playerSkillList = playerModel.playerSkillList;
-        playerSaveModel.playerPosition = creatVector2Save(playerModel.playerPosition);
-    }
-    void jsonToObject() 
+    void jsonToObject()
     {
         playerModel.playerName = playerSaveModel.playerName;
         playerModel.playerMaxHP = playerSaveModel.playerMaxHP;
@@ -67,13 +79,10 @@ public class PlayerSave : Singleton<PlayerSave>
         playerModel.playerPosition = new Vector2((float)playerModel.playerPosition.x, (float)playerModel.playerPosition.y);
 
     }
-    Vector2Save creatVector2Save(Vector2 vec) 
-    {
-        Vector2Save v2s = new Vector2Save();
-        v2s.x = double.Parse(vec.x.ToString());
-        v2s.y = double.Parse(vec.y.ToString());
-        return v2s;
-    }
+    #endregion
+
+
+
 }
 public class PlayerSaveModel
 {
