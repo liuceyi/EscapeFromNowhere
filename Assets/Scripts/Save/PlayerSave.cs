@@ -15,14 +15,14 @@ public class PlayerSave : Singleton<PlayerSave>
     #region 存档
     public void gameSave()
     {
-        objectToJson();
+        ObjectToJson();
         string playerModelJson = JsonMapper.ToJson(playerSaveModel);
         StreamWriter sw = new StreamWriter(filePath,true);
         sw.Write(playerModelJson);
         //关闭StreamWriter
         sw.Close();
     }
-    void objectToJson()
+    void ObjectToJson()
     {
         playerSaveModel.playerName = playerModel.playerName;
         playerSaveModel.playerMaxHP = playerModel.playerMaxHP;
@@ -44,7 +44,7 @@ public class PlayerSave : Singleton<PlayerSave>
 
 
     #region 读档
-    public void gameRead()
+    public void GameRead()
     {
         
         if (File.Exists(filePath))
@@ -58,7 +58,7 @@ public class PlayerSave : Singleton<PlayerSave>
 
             //将字符串playerModelJson转换为PlayerModel对象
             playerSaveModel = JsonMapper.ToObject<PlayerSaveModel>(playerModelJson);
-            jsonToObject();
+            JsonToObject();
         }
         else 
         {
@@ -67,7 +67,7 @@ public class PlayerSave : Singleton<PlayerSave>
         }
 
     }
-    void jsonToObject()
+    void JsonToObject()
     {
         playerModel.playerName = playerSaveModel.playerName;
         playerModel.playerMaxHP = playerSaveModel.playerMaxHP;

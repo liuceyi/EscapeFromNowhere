@@ -6,7 +6,7 @@ using LitJson;
 
 public class SkillJson
 {
-    public object getSkillJson()
+    public object GetSkillJson()
     {
         string jsonString = File.ReadAllText(Application.dataPath + "/Resources/Data/Skill.json");
         SkillUser skillObject = JsonMapper.ToObject<SkillUser>(jsonString);

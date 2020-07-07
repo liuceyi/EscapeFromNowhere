@@ -3,7 +3,7 @@ public class JsonController : Singleton<JsonController>
 {
     // Start is called before the first frame update
 
-    public object getJsonObj(string jsonTag) 
+    public object GetJsonObj(string jsonTag) 
     {
         object jsonObj = null;
         switch (jsonTag)
@@ -14,7 +14,7 @@ public class JsonController : Singleton<JsonController>
                 break;
             case "skill":
                 SkillJson skillJson = new SkillJson();
-                jsonObj = skillJson.getSkillJson();
+                jsonObj = skillJson.GetSkillJson();
                 break;
             case "buff":
                 BuffJson buffJson = new BuffJson();

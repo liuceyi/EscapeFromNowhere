@@ -14,6 +14,6 @@ public class GameMainController : MonoSingleton<GameMainController>
         playerModel = new PlayerModel();
         playerModel = PlayerSave.Instance.playerModel;
         DontDestroyOnLoad(this);
-        PlayerSave.Instance.gameRead();//读档
+        PlayerSave.Instance.GameRead();//读档
     }
 }
