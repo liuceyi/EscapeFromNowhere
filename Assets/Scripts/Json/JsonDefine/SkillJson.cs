@@ -10,7 +10,6 @@ public class SkillJson
     {
         string jsonString = File.ReadAllText(Application.dataPath + "/Resources/Data/Skill.json");
         SkillUser skillObject = JsonMapper.ToObject<SkillUser>(jsonString);
-        Debug.Log(skillObject.Character01[0].Name);
         return skillObject;
     }
 }
@@ -20,7 +19,7 @@ public class Skill
     public string ID;
     public string Name;
     public List<string> ParentID;
-
+    public int[] Pos = new int[2];
 }
 
 [Serializable]
