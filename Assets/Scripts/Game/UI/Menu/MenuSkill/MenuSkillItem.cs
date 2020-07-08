@@ -46,8 +46,10 @@ public class MenuSkillItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     bool CheckParentActive()
     {
         List<string> parentList = skill.ParentID;
-        for (int i = 0; i < parentList.Count; i++)
+        if (parentList[0] == "-1") { return true; }
+            for (int i = 0; i < parentList.Count; i++)
         {
+            
             if (!menuSkillManager.GetNode(parentList[i]).GetComponent<MenuSkillItem>().isActive) return false;
         }
         return true;
@@ -68,8 +70,8 @@ public class MenuSkillItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             for (int i = 0; i < lineBelongs.Count; i++)
             {
                 isActive = true;
-                lineBelongs[i].startColor = Color.blue;
-                lineBelongs[i].endColor = Color.blue;
+                lineBelongs[i].startColor = new Color(132/255f,112/255f,255/255f);
+                lineBelongs[i].endColor = new Color(72 / 255f, 61 / 255f, 139 / 255f);
             }
             
         }

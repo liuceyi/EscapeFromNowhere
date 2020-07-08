@@ -10,6 +10,7 @@ public class MenuSkillManager : MenuChildManager
     public RectTransform skillContent;
     public RectTransform lineContent;
     private int deltaIndex = 100;
+    private float lineWidth = 0.1f; 
     private Dictionary<string, GameObject> nodeDict = new Dictionary<string,GameObject>();
     private Dictionary<string, List<string>> childDict = new Dictionary<string, List<string>>();
     private Dictionary<string, int[]> posDict = new Dictionary<string, int[]>();
@@ -199,8 +200,8 @@ public class MenuSkillManager : MenuChildManager
     }
     private LineRenderer DrawPoint(Vector2 point, Color Color) 
     {
-        Vector2 startPoint = new Vector2(point.x - 10, point.y);
-        Vector2 endPoint = new Vector2(point.x + 10, point.y);
+        Vector2 startPoint = new Vector2(point.x - lineWidth/2, point.y);
+        Vector2 endPoint = new Vector2(point.x + lineWidth/2, point.y);
         LineRenderer pointOfLine = DrawLine(startPoint,endPoint, Color, Color);
         return pointOfLine;
     }
@@ -217,8 +218,8 @@ public class MenuSkillManager : MenuChildManager
         line.endColor = endColor;
         
         //设置起始和结束的宽度  
-        line.startWidth = 0.2f;
-        line.endWidth = 0.2f;
+        line.startWidth = lineWidth;
+        line.endWidth = lineWidth;
 
         line.SetPosition(0, startPoint);
         line.SetPosition(1, endPoint);
