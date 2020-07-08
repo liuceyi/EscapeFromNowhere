@@ -135,6 +135,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillItemImg: {fileID: 5557615606437510464}
   skillItemMask: {fileID: 3482080668473814710}
+  popOverPrefab: {fileID: 816207388365079322, guid: 8f0a256f9a1aaf44a90da551a9bdcd97,
+    type: 3}
+  isActive: 0
 --- !u!1 &6186268130465232931
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,6 +9,8 @@ public class MenuSkillItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 {
     public Image skillItemImg;
     public Image skillItemMask;
+    public GameObject popOverPrefab;
+    private GameObject popOver;
     private Skill skill;
     private MenuSkillManager menuSkillManager;
     private List<LineRenderer> lineBelongs = new List<LineRenderer>();
@@ -19,6 +21,7 @@ public class MenuSkillItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         
         menuSkillManager = father;
         LoadAssets();
+        spawnPopOver();
         if (skill.ParentID[0] == "-1") isActive = true;
         
         skillItemMask.enabled = false;
@@ -34,14 +37,14 @@ public class MenuSkillItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         }
         
     }
-    
-    public void OnPointerEnter(PointerEventData eventData)
+
+    void spawnPopOver() 
     {
-        //当鼠标光标移入该对象时触发
-
-        skillItemMask.enabled = true;
+        popOver = Instantiate(popOverPrefab, transform);
+        popOver.GetComponent<MenuSkillPopOver>().Init(skill.Name,skill.Info);
+        popOver.transform.localPosition = new Vector2(60,130);
+        popOver.SetActive(false);
     }
-
     
     bool CheckParentActive()
     {
@@ -54,11 +57,21 @@ public class MenuSkillItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         }
         return true;
     }
+    #region 鼠标事件
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        //当鼠标光标移入该对象时触发
+
+        skillItemMask.enabled = true;
+        popOver.SetActive(true);
+
+    }
 
     public void OnPointerExit(PointerEventData eventData)
     {
 
         skillItemMask.enabled = false;
+        popOver.SetActive(false);
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -81,4 +94,5 @@ public class MenuSkillItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             return;
         }
     }
+    #endregion
 }

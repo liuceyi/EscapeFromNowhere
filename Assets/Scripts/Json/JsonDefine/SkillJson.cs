@@ -20,6 +20,7 @@ public class Skill
     public string Name;
     public List<string> ParentID;
     public int[] Pos = new int[2];
+    public string Info;
 }
 
 [Serializable]
