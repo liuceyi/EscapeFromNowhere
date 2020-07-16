@@ -618,7 +618,7 @@ MonoBehaviour:
   debugDraw: 0
   animationName: Idle
   _playTimes: 0
-  _timeScale: 1
+  _timeScale: 1.5
   _sortingMode: 0
   _sortingLayerName: Default
   _sortingOrder: 0
