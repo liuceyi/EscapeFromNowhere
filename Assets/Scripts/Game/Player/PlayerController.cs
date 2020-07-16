@@ -33,11 +33,17 @@ public partial class PlayerController : MonoBehaviour
 
             //之后增加翻转角色功能的话就都right
             if (horz > 0f)
+            {
                 transform.localScale = new Vector2(1,1);
-                transform.Translate(new Vector2(1, 0) * movingSpeed * Time.deltaTime);
-            if (horz < 0f)
+                transform.Translate(Vector2.right * movingSpeed * Time.deltaTime);
+            }
+
+            if (horz < 0f) 
+            {
                 transform.localScale = new Vector2(-1, 1);
-                transform.Translate(new Vector2(-1, 0) * movingSpeed * Time.deltaTime);
+                transform.Translate(Vector2.left * movingSpeed * Time.deltaTime);
+            }
+               
         }
         else {
             isRun = false;
