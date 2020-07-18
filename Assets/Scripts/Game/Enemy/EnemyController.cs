@@ -10,6 +10,8 @@ public class EnemyController : MonoBehaviour
     public GameObject dragonBonesObj;
     private UnityArmatureComponent unityArmature;//UnityArmatureComponent对象
 
+    public GameObject bulletPrefab;
+
     //敌人状态
     public const int STATE_STAND = 0;//站立
     public const int STATE_WALK = 1;//行走
@@ -26,10 +28,12 @@ public class EnemyController : MonoBehaviour
     public const int AI_THINK_TIME = 2;
     //敌人的巡逻范围
     public const int AI_ATTACK_DISTANCE = 10;
+    
     private void Awake()
     {
         thisBody = this.GetComponent<Rigidbody2D>();
-        unityArmature = dragonBonesObj.GetComponent<UnityArmatureComponent>();//获得UnityArmatureComponent对象
+        player = GameObject.Find("TestPlayer");
+        //unityArmature = dragonBonesObj.GetComponent<UnityArmatureComponent>();//获得UnityArmatureComponent对象
 
     }
     public void Init(GameObject playerObj)  
@@ -41,10 +45,23 @@ public class EnemyController : MonoBehaviour
     }
     void Update()
     {
-        CheckAI();
+        //CheckAI();
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            EnemyAttack(); 
+        }
 
         
+        
     }
+    void EnemyAttack() 
+    {
+        //定时？判定？
+        Debug.Log(BulletController.Instance);
+        //发射子弹
+        BulletController.Instance.SpawnBullet(0,6,3,0.5f,1,100,bulletPrefab,gameObject,player);
+    }
+
     void CheckAI()
     {
         //判断敌人与主角的距离
