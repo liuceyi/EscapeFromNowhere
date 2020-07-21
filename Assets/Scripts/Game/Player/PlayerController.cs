@@ -9,27 +9,43 @@ public partial class PlayerController : MonoBehaviour
     public float movingSpeed = 2.8f;
     public GameObject dragonBonesObj;
     private UnityArmatureComponent unityArmature;//UnityArmatureComponent对象
-    private bool isRun = false;
-    private bool isIdle = false;
+    private AnimState animState;
     private void Awake()
     {
+
+
+        
+
         thisBody = this.GetComponent<Rigidbody2D>();
-        unityArmature = dragonBonesObj.GetComponent<UnityArmatureComponent>();//获得UnityArmatureComponent对象
+        //unityArmature = dragonBonesObj.GetComponent<UnityArmatureComponent>();//获得UnityArmatureComponent对象
         
     }
-
+    private void Start()
+    {
+        animState = new AnimState(gameObject);
+        IdleState idleState = new IdleState();
+        animState.RegisterState(idleState);
+        animState.SetDefaultState(idleState);
+        animState.RegisterState(new RunState());
+        animState.RegisterState(new AttackState());
+        animState.SwitchState(PlayerState.Idle);//初始化进入待机状态
+    }
     void Update()
     {
+        if (animState != null)
+        {
+            animState.Update(Time.deltaTime);
+        }
+        if (animState.GetState() == PlayerState.Attack) 
+        {
+            return;
+        }
         float horz = Input.GetAxis(GameGlobal.horzAxis);
 
         if (horz < 0f || horz > 0f)
         {
-            isIdle = false;
-            if (!isRun) 
-            {
-                isRun = true;
-                unityArmature.animation.Play("Run");//播放动画
-            }
+
+            animState.SwitchState(PlayerState.Run);
 
             //之后增加翻转角色功能的话就都right
             if (horz > 0f)
@@ -46,20 +62,22 @@ public partial class PlayerController : MonoBehaviour
                
         }
         else {
-            isRun = false;
-            //unityArmature.animation.Stop("Run");//停止动画
-            if (!isIdle) 
-            {
-                isIdle = true;
-                unityArmature.animation.Play("Idle");//播放动画
-            }
-            
-          
+
+            if (animState.GetState() == PlayerState.Run) { animState.StopState(); }
+
+
         }
 
         CheckJump();
         CheckFall();
         CheckAttack(); 
+    }
+    private void LateUpdate()
+    {
+        if (animState != null)
+        {
+            animState.LateUpdate(Time.deltaTime);
+        }
     }
     private void CheckFall() 
     {
@@ -71,4 +89,6 @@ public partial class PlayerController : MonoBehaviour
             PublicTool.changeAttribute(PlayerAttribute.HP, -1);
         }
     }
+
+
 }

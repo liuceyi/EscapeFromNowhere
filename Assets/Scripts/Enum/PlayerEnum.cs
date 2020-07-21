@@ -6,3 +6,12 @@ public enum PlayerAttribute
     HP
 }
 
+public enum PlayerState 
+{
+    Attack,
+    Idle,
+    Run,
+    Walk,
+    Hurt,
+    Die
+}
