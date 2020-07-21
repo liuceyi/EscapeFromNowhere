@@ -8,9 +8,9 @@ public class JsonController : Singleton<JsonController>
         object jsonObj = null;
         switch (jsonTag)
         {
-            case "monster":
-                MonsterJson monsterJson = new MonsterJson();
-                jsonObj = monsterJson.getMonsterJson(); 
+            case "enemy":
+                EnemyJson enemyJson = new EnemyJson();
+                jsonObj = enemyJson.GetEnemyJson(); 
                 break;
             case "skill":
                 SkillJson skillJson = new SkillJson();

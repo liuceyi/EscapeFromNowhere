@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,18 +7,29 @@ using UnityEngine.UI;
 public class GameMainUI : MonoBehaviour
 {
     public Image imgHPBar;
-    private PlayerModel userdata;
+    private PlayerModel userData;
 
+    private void Awake()
+    {
+        
+        MsgCenter.Instance.SubscribeMessage("UpdateHPBar", UpdateHPBar);
+        UpdateHPBar();
+    }
+
+    private void OnDestroy()
+    {
+        MsgCenter.Instance.RemoveMessage("UpdateHPBar");
+    }
 
     //需要信号
     private void UpdateHPBar()
     {
-        if (userdata == null)
+        if (userData == null)
         {
-            userdata = GameMainController.Instance.playerModel;
+            userData = GameMainController.Instance.playerModel;
         }
 
-        imgHPBar.fillAmount = (float)userdata.playerHP / userdata.playerMaxHP;
+        imgHPBar.fillAmount = (float)userData.playerHP / userData.playerMaxHP;
 
         //imgHPBar.fillAmount = currentHP/MAXHP
     }

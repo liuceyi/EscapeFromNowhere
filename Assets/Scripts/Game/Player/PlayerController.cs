@@ -57,6 +57,18 @@ public partial class PlayerController : MonoBehaviour
           
         }
 
-            CheckJump();
+        CheckJump();
+        CheckFall();
+        CheckAttack(); 
+    }
+    private void CheckFall() 
+    {
+        if (transform.position.y < -7f) 
+        {
+            Debug.Log("fall off");
+            transform.position = new Vector2(-6,0);
+            //-hp
+            PublicTool.changeAttribute(PlayerAttribute.HP, -1);
+        }
     }
 }

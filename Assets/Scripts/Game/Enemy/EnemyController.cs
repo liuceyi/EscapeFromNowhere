@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DragonBones;
+using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour
 {
@@ -11,7 +12,21 @@ public class EnemyController : MonoBehaviour
     private UnityArmatureComponent unityArmature;//UnityArmatureComponent对象
 
     public GameObject bulletPrefab;
-
+    public Slider HPBar;//绑定血条
+    private float _enemyHP;
+    private float enemyMaxHP;
+    public float enemyHP
+    {
+        get
+        {
+            return _enemyHP;
+        }
+        set
+        {
+            _enemyHP = value;
+            UpdateHPBar();
+        }
+    }
     //敌人状态
     public const int STATE_STAND = 0;//站立
     public const int STATE_WALK = 1;//行走
@@ -40,6 +55,10 @@ public class EnemyController : MonoBehaviour
     {
         //得到主角对象
         player = playerObj;
+        //初始化敌人数据
+        
+        enemyMaxHP = 100;
+        enemyHP = enemyMaxHP;
         //设置敌人的默认状态站立
         enemyState = STATE_STAND;
     }
@@ -51,8 +70,14 @@ public class EnemyController : MonoBehaviour
             EnemyAttack(); 
         }
 
-        
-        
+        Vector2 enemyPosition = Camera.main.WorldToScreenPoint(transform.position);
+        float y = transform.lossyScale.y * GetComponent<SpriteRenderer>().sprite.bounds.size.y;
+        HPBar.transform.position = enemyPosition + new Vector2(0, 50*y);
+
+    }
+    private void UpdateHPBar() 
+    {
+        HPBar.value = enemyHP / enemyMaxHP;
     }
     void EnemyAttack() 
     {

@@ -6,6 +6,7 @@ public static class GameGlobal
 {
     #region 按钮名定义
     public static string jumpButton = "Jump";
+    public static string attackButton = "Attack";
     public static string horzAxis = "Horizontal";
     public static string vertAxis = "Vertical";
     public static string yes = "Submit";

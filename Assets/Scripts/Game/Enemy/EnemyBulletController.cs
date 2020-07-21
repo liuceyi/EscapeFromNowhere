@@ -24,6 +24,9 @@ public class EnemyBulletController : MonoBehaviour
         if (collider.tag == "Player") 
         {
             Debug.Log("hit");
+            //-hp
+            PublicTool.changeAttribute(PlayerAttribute.HP, -damage);
+            Destroy(gameObject);
         }
     }
 }

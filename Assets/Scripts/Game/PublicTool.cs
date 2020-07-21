@@ -12,5 +12,16 @@ public static class PublicTool
             GameObject.Destroy(item.gameObject);
         }
     }
+    public static void changeAttribute(PlayerAttribute attribute, int num)
+    {
+        switch (attribute)
+        {
+            case PlayerAttribute.HP:
+                GameMainController.Instance.playerModel.playerHP += num;
+                break;
 
+        }
+
+        MsgCenter.Instance.Publish("UpdateHPBar");
+    }
 }
